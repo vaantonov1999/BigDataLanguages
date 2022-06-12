@@ -1,0 +1,33 @@
+IMPORT JAVA.UTIL.SCANNER;
+
+PUBLIC CLASS PROGRAM1 {
+
+        PUBLIC STATIC VOID MAIN(STRING[] ARGS) {
+            INT n;
+            SCANNER SCANNER = NEW SCANNER(SYSTEM.in);
+            SYSTEM.OUT.PRINT("ВВЕДИТЕ КОЛ-ВО СТРОК" + ": ");
+            n = SCANNER.NEXTINT();
+            SCANNER.NEXTLINE();
+            STRING[] STRING = NEW STRING[N];
+            FOR (INT i = 0; i < n; I++) {
+                SYSTEM.OUT.PRINT(" НОМЕР СТРОКИ " + (I+1) + ": ");
+                STRING[I] = SCANNER.NEXTLINE(); }
+
+            SYSTEM.OUT.PRINTLN (" ВЫВОД БЕЗ ПЕРЕХОД на НОВУЮ СТРОКУ " + ": ");
+            FOR (INT i = 0; i < n; I++) {
+                SYSTEM.OUT.PRINT (STRING[I]);
+            }
+            SYSTEM.OUT.PRINTLN();
+
+            SYSTEM.OUT.PRINTLN (" ВЫВОД ПЕРЕХОД на НОВУЮ СТРОКУ " + ": ");
+            FOR (INT i = 0; i < n; I++) {
+                SYSTEM.OUT.PRINTLN (STRING[I]);
+            }
+        }
+}
+
+
+
+
+
+
