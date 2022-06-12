@@ -1,0 +1,47 @@
+
+from pyspark import SparkContext
+from datetime import datetime
+from pyspark.sql import SparkSession
+import time
+start_time = time.time()
+spark = SparkSession.builder.appName('abc').getOrCreate()
+df1=spark.read.csv('hdfs://localhost:9000/zadanie5/Cadets.csv',header=True)
+df2=spark.read.csv('hdfs://localhost:9000/zadanie5/Group.csv',header=True)
+my_table1 = df1.createOrReplaceTempView('Cadets')
+my_table2 = df2.createOrReplaceTempView('Group')
+#sql_table = spark.sql('SELECT * FROM Cadets')
+#sql_table = spark.sql('SELECT count(c1.id_group)*g1.cost_education FROM Cadets c1, Group g1 Where c1.id_group = g1.id_group;')
+#sql_table = spark.sql('SELECT c1.id_group,g1.cost_education,count(c1.id_group)*max(g1.cost_education) FROM Cadets c1, Group g1 Where c1.id_group = g1.id_group;')
+sql_table = spark.sql('SELECT g1.id_group as id, count(c1.id_group)*g1.cost_education AS m FROM Cadets c1, Group g1 Where c1.id_group = g1.id_group GROUP BY id, g1.cost_education ORDER BY m desc LIMIT 1;')
+sql_table.show()
+print("-— %s seconds —-" % (time.time() - start_time))
+quit()
+
+
+sql_table = spark.sql('SELECT service  FROM Group  Where id_group = 10 GROUP BY service;')
+
+sql_table = spark.sql('SELECT cadets as cadet  FROM Cadets  Where id_group = 1 GROUP BY cadet;')
+
+sql_table = spark.sql('SELECT cadets as cadet  FROM Cadets  Where id_group > 7 GROUP BY cadet;')
+
+sql_table = spark.sql('SELECT id_group   FROM Group  Where cost_education = 30000 GROUP BY id_group ORDER BY id_group;')
+
+sql_table = spark.sql('SELECT id_group   FROM Group  Where cost_education < 30000 GROUP BY id_group ORDER BY id_group;')
+
+sql_table = spark.sql('SELECT id_teacher  FROM Group  Where id_group > 5 GROUP BY id_group, id_teacher ;')
+
+sql_table = spark.sql('SELECT id_group  FROM Group  Where number_of_classes < 35 GROUP BY id_group;')
+
+sql_table = spark.sql('SELECT id_teacher  FROM Group  Where start_date_of_classes = "2021-09-08" GROUP BY id_teacher;')
+
+sql_table = spark.sql('SELECT id_group  FROM Group  Where start_date_of_classes > "2021-09-08" GROUP BY id_group;')
+
+
+
+
+
+
+
+
+
+
